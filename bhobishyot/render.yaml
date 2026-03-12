@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: bhobishyot
+    env: node
+    region: singapore   # Closest to Bangladesh
+    plan: free
+    buildCommand: npm install && cd client && npm install && npm run build && cd ../server && npm install
+    startCommand: NODE_ENV=production node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ANTHROPIC_API_KEY
+        sync: false   # You enter this in Render dashboard
+    healthCheckPath: /api/health
